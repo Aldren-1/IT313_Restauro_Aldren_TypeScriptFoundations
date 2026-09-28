@@ -1,0 +1,70 @@
+Laboratory 3 - IT 313 – Mobile Programming
+Video Demonstration: TypeScript Foundations for React Native
+Objective
+Demonstrate your understanding of TypeScript foundations for React Native by refactoring an untyped
+JavaScript program into a fully-typed TypeScript program — applying basic types, interfaces, type
+aliases, enums, union types, optional properties, and generics — and recording a video that shows and
+explains your solution as you write, run, and type-check it.
+The Problem: Enrollment Eligibility Checker — Now With Types
+In Laboratory 2 you built a JavaScript registrar utility that computed each enrollee's average and
+eligibility status. The registrar's office has approved your tool for pilot use — but before it goes live, the
+IT department requires every utility to be rewritten in TypeScript so type-related bugs are caught before
+they ever reach a real student record. Your task is to port (or re-implement) the Enrollment Eligibility
+Checker in TypeScript, with every value, function, and data shape explicitly typed.
+Starter data (place this in your main script or a separate data file, typed as shown):
+interface Enrollee {
+ name: string;
+ prelim: number;
+ midterm: number;
+ final: number;
+}
+const enrollees: Enrollee[] = [
+ { name: "Ana Cruz", prelim: 85, midterm: 90, final: 88 },
+ { name: "Bea Santos", prelim: 70, midterm: 65, final: 60 },
+ { name: "Cid Ramos", prelim: 95, midterm: 92, final: 97 },
+ { name: "Dex Alonzo", prelim: 60, midterm: 55, final: 50 },
+ { name: "Eli Tan", prelim: 78, midterm: 80, final: 76 },
+];
+Passing standard: an enrollee is PASSING if their average of prelim, midterm, and final is 75 or above;
+otherwise they are on PROBATION — but this time, status must be represented with an enum, not a raw
+string.
+Sample expected output (your formatting may vary slightly, but the information must match):
+=== IT313 Enrollment Eligibility Report (TypeScript) ===
+Ana Cruz - Average: 87.67 - PASSING
+Bea Santos - Average: 65.00 - PROBATION - Needs consultation
+Cid Ramos - Average: 94.67 - PASSING
+Dex Alonzo - Average: 55.00 - PROBATION - Needs consultation
+Eli Tan - Average: 78.00 - PASSING
+Class Average: 76.07
+Passing: 3 / 5
+> npx tsc --noEmit
+(no output — 0 type errors)
+Requirements — your solution must:
+• Configure the project for TypeScript: add a tsconfig.json (npx tsc --init is fine) with "strict": true
+enabled, and use .ts file extensions for every source file.
+• Define an EnrollmentStatus enum with members Passing and Probation, and use it — not a plain
+string — everywhere a status is stored or compared.
+• Define an Enrollee interface (name: string; prelim: number; midterm: number; final: number) and
+a separate EligibilityReport interface or type alias with name: string; average: number; status:
+EnrollmentStatus; remarks?: string — an optional property you set only for enrollees on
+PROBATION (e.g., "Needs consultation").
+• Create a separate module file (e.g., gradeUtils.ts) that exports a named function
+computeAverage(prelim: number, midterm: number, final: number): number and a default
+function getStatus(average: number): EnrollmentStatus, both fully typed, then import both into
+your main script using ES module import/export syntax.
+--+• Write a function getEnrollees(): Promise<Enrollee[]> that resolves with the enrollees array after a
+short delay (e.g., using setTimeout), simulating a call to a registrar API, and an async function
+that awaits it inside a try/catch block so a failed "connection" is caught and reported instead of
+crashing the program.
+• Use a union type (e.g., let batchId: string | number;) somewhere meaningful in your program —
+for example, a batch or request ID that can come back as either a string or a number from the
+"API" — and show TypeScript narrowing it (e.g., with a typeof check) before you use it.
+• Write one generic function — for example, function groupBy<T>(items: T[], keyFn: (item: T) =>
+string): Record<string, T[]> — and use it to group your typed report entries by status, in place of
+or alongside .filter().
+• Use .map(), together with your imported computeAverage() and getStatus(), to build a typed array
+of EligibilityReport objects; use .reduce() to compute the class average; use template literals to
+print the formatted report shown above.
+• Run npx tsc --noEmit with zero type errors before your recording is considered complete.
+• Include a README.md in your project explaining the problem, the TypeScript concepts you
+applied and why, and how to run gradeUtils.ts and your main script (e.g., with ts-node).

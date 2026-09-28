@@ -1,0 +1,26 @@
+{
+  "name": "it313_restauro_aldren_typescriptfoundations",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Aldren-1/IT313_Restauro_Aldren_TypeScriptFoundations.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Aldren-1/IT313_Restauro_Aldren_TypeScriptFoundations/issues"
+  },
+  "homepage": "https://github.com/Aldren-1/IT313_Restauro_Aldren_TypeScriptFoundations#readme",
+  "devDependencies": {
+    "@types/node": "^26.6.3",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.3"
+  }
+}
